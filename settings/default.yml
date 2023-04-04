@@ -7,7 +7,7 @@ api:
     approve: false
     notify-email: bridge@worf.dev
 encryption:
-  key: aabbccdd
+  key: ZSQeLnHC9oEGcUnvXUNs4QbIQbpc27Z1UGUoF7h+k2Q= # replace this!
 debug: true
 test: false
 date_format: '%Y-%m-%d'

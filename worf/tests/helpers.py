@@ -18,13 +18,9 @@ from worf.settings import settings as settings
 from worf.api.app import get_app
 from worf.cli.db import _migrate_db, _clean_db
 
-from typing import List, Callable, Type, Dict, Any
-
 
 class DatabaseTest(unittest.TestCase):
-    fixtures: List[
-        Dict[str, Callable[[Type["DatabaseTest"], Dict[str, Any]], Any]]
-    ] = []
+    fixtures = []
 
     @classmethod
     def setup(cls):
@@ -37,7 +33,7 @@ class DatabaseTest(unittest.TestCase):
     @classmethod
     def initialize_fixtures(cls):
         _clean_db(settings, None)
-        fixture_objs: Dict[str, Any] = {}
+        fixture_objs = {}
         for fixture_dict in cls.fixtures:
             for key, fixture in fixture_dict.items():
                 objs = fixture(cls, fixture_objs)

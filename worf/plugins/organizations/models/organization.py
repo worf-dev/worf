@@ -32,9 +32,14 @@ class Organization(Base):
     name = Column(Unicode, nullable=False)
     description = Column(UnicodeText, nullable=True, index=False)
     active = Column(Boolean, nullable=False, default=True)
-    users = relationship("User", secondary="organization_role", backref="organizations")
+    users = relationship(
+        "User", secondary="organization_role", backref="organizations", viewonly=True
+    )
     invitations = relationship(
-        "Invitation", secondary="organization_invitation", backref="organizations"
+        "Invitation",
+        secondary="organization_invitation",
+        backref="organizations",
+        viewonly=True,
     )
 
 

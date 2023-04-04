@@ -1,4 +1,3 @@
-from typing import List, Tuple, Callable, Dict, Any
 from .resources import (
     Customer,
     Invoices,
@@ -12,7 +11,7 @@ from .resources import (
 
 from .resources.admin import Sync
 
-routes: List[Dict[str, Tuple[Callable, Dict[str, Any]]]] = [
+routes = [
     {"/admin/sync": (Sync, {"methods": ["POST"]})},
     {"/admin/sync/<provider_name>": (Sync, {"methods": ["POST"]})},
     {

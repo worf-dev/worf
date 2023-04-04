@@ -1,4 +1,4 @@
-from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import declarative_base
 from sqlalchemy_utils import UUIDType, JSONType
 from sqlalchemy import Column, DateTime, Unicode, BigInteger, Integer
 from sqlalchemy.sql import func
@@ -8,13 +8,12 @@ from sqlalchemy.orm.attributes import flag_modified
 import sqlalchemy.types as types
 import datetime
 
-from typing import Type
 
 BigIntegerType = BigInteger()
 BigIntegerType = BigIntegerType.with_variant(postgresql.BIGINT(), "postgresql")
 BigIntegerType = BigIntegerType.with_variant(sqlite.INTEGER(), "sqlite")
 
-DeclarativeBase: Type = declarative_base()
+DeclarativeBase = declarative_base()
 PkType = BigIntegerType
 ExtPkType = UUIDType(binary=False)
 

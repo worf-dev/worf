@@ -1,12 +1,8 @@
 import datetime
 
-from typing import List, Callable, Any, Optional, Tuple, Dict
-
 
 class Field:
-    default_validators: List[
-        Callable[[str, Any, "Form"], Optional[Tuple[Dict[str, Any], Any, bool]]]
-    ] = []
+    default_validators = []
 
     @property
     def validators(self):
@@ -51,22 +47,22 @@ class Form(metaclass=FormMeta):
         return self._raw_data
 
     @property
-    def valid_data(self) -> Dict[str, Any]:
+    def valid_data(self):
         return self._valid_data
 
     @property
-    def errors(self) -> Optional[Dict[str, List[str]]]:
+    def errors(self):
         return self._errors
 
     @raw_data.setter  # type: ignore
-    def raw_data(self, data: Optional[Dict[str, Any]]):
+    def raw_data(self, data):
         self._raw_data = data or {}
-        self._valid_data: Dict[str, Any] = {}
-        self._errors: Optional[Dict[str, List[str]]] = None
+        self._valid_data = {}
+        self._errors = None
 
     def validate(self):
-        data: Dict[str, Any] = {}
-        errors: Dict[str, List[str]] = {}
+        data = {}
+        errors = {}
         valid = True
         self._valid_data = None
         for name, field in self.fields.items():

@@ -12,7 +12,7 @@ class LoginProvider(Base):
 
     provider_id = Column(Unicode, nullable=False)
 
-    user_id = Column(ForeignKey("user.id"), nullable=False)
+    user_id = Column(ForeignKey("user.id"), nullable=False)  # type: ignore
     provider = Column(Unicode, nullable=False)
     user = relationship(
         "User", backref=backref("login_providers", cascade="all,delete,delete-orphan")
@@ -31,6 +31,7 @@ class LoginProvider(Base):
         )
         if prov is None:
             prov = cls(provider=provider, user=user, provider_id=provider_id)
+            session.add(prov)
         return prov
 
     @classmethod

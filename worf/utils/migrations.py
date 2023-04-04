@@ -6,7 +6,7 @@ import traceback
 
 from collections import defaultdict
 from sqlalchemy import text
-from sqlalchemy.exc import ProgrammingError
+from sqlalchemy.exc import ProgrammingError, InternalError
 
 logger = logging.getLogger(__name__)
 
@@ -67,13 +67,16 @@ class MigrationManager(object):
             "version_table": self.config["version_table"]["name"],
             "version_column": self.config["version_table"]["version_column"],
         }
-        try:
-            result = self.connection.execute(
-                "SELECT {version_column} FROM {version_table}".format(**context)
-            )
-        except ProgrammingError:
-            logger.warning("It seems the version table does not exist yet...")
-            return 0
+        with self.connection.begin():
+            try:
+                result = self.connection.execute(
+                    text(
+                        "SELECT {version_column} FROM {version_table}".format(**context)
+                    )
+                )
+            except ProgrammingError:
+                logger.warning("It seems the version table does not exist yet...")
+                return 0
         version = result.fetchone()
         if version is not None:
             version = int(version[0])
@@ -82,31 +85,40 @@ class MigrationManager(object):
         return version
 
     def update_version_table(self, version):
-        count_result = self.connection.execute(
-            "SELECT COUNT('*') FROM {}".format(self.config["version_table"]["name"])
-        )
-        count = count_result.fetchone()[0]
-        context = {
-            "version_table": self.config["version_table"]["name"],
-            "version_column": self.config["version_table"]["version_column"],
-            "version": version,
-        }
-        if count == 0:
-            result = self.connection.execute(
-                "INSERT INTO {version_table} ({version_column}) values ({version})".format(
-                    **context
+        with self.connection.begin():
+            count_result = self.connection.execute(
+                text(
+                    "SELECT COUNT('*') FROM {}".format(
+                        self.config["version_table"]["name"]
+                    )
                 )
             )
-        elif count == 1:
-            result = self.connection.execute(
-                "UPDATE {version_table} SET {version_column} = {version}".format(
-                    **context
+            count = count_result.fetchone()[0]
+            context = {
+                "version_table": self.config["version_table"]["name"],
+                "version_column": self.config["version_table"]["version_column"],
+                "version": version,
+            }
+            if count == 0:
+                result = self.connection.execute(
+                    text(
+                        "INSERT INTO {version_table} ({version_column}) values ({version})".format(
+                            **context
+                        )
+                    )
                 )
-            )
-        else:
-            raise MigrationError(
-                "Version table has more than one entry ({})!".format(count)
-            )
+            elif count == 1:
+                result = self.connection.execute(
+                    text(
+                        "UPDATE {version_table} SET {version_column} = {version}".format(
+                            **context
+                        )
+                    )
+                )
+            else:
+                raise MigrationError(
+                    "Version table has more than one entry ({})!".format(count)
+                )
 
     def migrate(self, version=None, in_transaction=True):
         """
@@ -147,11 +159,7 @@ class MigrationManager(object):
         if not migrations:
             logger.info("Database is already up-to-date, aborting...")
             return
-        if in_transaction:
-            with self.connection.begin():
-                self.execute_migrations(migrations, direction, in_transaction=False)
-        else:
-            self.execute_migrations(migrations, direction, in_transaction=True)
+        self.execute_migrations(migrations, direction, in_transaction=in_transaction)
 
     def execute_migrations(self, migrations, direction, in_transaction=True):
         logger.info(
@@ -159,17 +167,20 @@ class MigrationManager(object):
                 ", ".join(["{}".format(m[0]) for m in migrations]), direction
             )
         )
+
         for v, migration in migrations:
+            full_script = f"""
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+{migration['script']}"""
+
             try:
                 logger.info("Executing migration {}...".format(migration["filename"]))
-                self.connection.execute(
-                    "SET statement_timeout = 0; SET lock_timeout = 0;"
-                )
                 if in_transaction:
                     with self.connection.begin():
-                        result = self.connection.execute(text(migration["script"]))
+                        result = self.connection.execute(text(full_script))
                 else:
-                    result = self.connection.execute(text(migration["script"]))
+                    result = self.connection.execute(text(full_script))
             except ProgrammingError as pe:
                 logger.error(
                     "An error occurred when executing migration {}, aborting...".format(

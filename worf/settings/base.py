@@ -1,9 +1,7 @@
 from worf.utils.settings import Settings, load_settings
 import os
 
-from typing import List
-
-settings_filenames: List[str] = []
+settings_filenames = []
 
 # finally we load custom settings...
 _worf_settings_d = os.environ.get("WORF_SETTINGS_D", "").split(":")

@@ -1,9 +1,11 @@
 from flask import Flask, jsonify
-from flask.json import JSONEncoder
+from flask.json.provider import DefaultJSONProvider
 from urllib.parse import urlparse
 import traceback
 import datetime
 import logging
+import json
+import uuid
 
 logger = logging.getLogger(__name__)
 
@@ -65,11 +67,16 @@ def get_app(settings, routes=routes):
     app.url_map.converters["regex"] = RegexConverter
     configure(app, settings, (("v1", routes),), o.path)
     app.handle_exception = handle_exception
-    app.json_encoder = CustomJSONEncoder
+    app.json = CustomJSONProvider(app)
     return app
 
 
-class CustomJSONEncoder(JSONEncoder):
+class CustomJSONProvider(DefaultJSONProvider):
+    def dumps(self, obj, *args, **kwargs):
+        return json.dumps(obj, *args, cls=Encoder, **kwargs)
+
+
+class Encoder(json.JSONEncoder):
     def default(self, obj):
         if isinstance(obj, datetime.datetime):
             if obj.utcoffset() is not None:
@@ -77,4 +84,6 @@ class CustomJSONEncoder(JSONEncoder):
             return obj.isoformat("T") + "Z"
         elif isinstance(obj, datetime.date):
             return obj.isoformat()
-        return JSONEncoder.default(self, obj)
+        elif isinstance(obj, uuid.UUID):
+            return str(obj)
+        return super().default(obj)

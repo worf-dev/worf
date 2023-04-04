@@ -3,8 +3,6 @@ from .subscriptions import Subscriptions
 from .checkouts import Checkouts
 from .payments import Payments
 from ..base import BaseProvider
-from typing import List, Dict, Tuple, Callable, Any
-
 from worf.settings import settings
 
 import logging
@@ -26,7 +24,7 @@ class BankTransfer(BaseProvider):
         return "bank_transfer"
 
     @property
-    def routes(self) -> List[Dict[str, Tuple[Callable, Dict[str, Any]]]]:
+    def routes(self):
         return []
 
     @property
