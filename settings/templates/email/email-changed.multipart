@@ -1,0 +1,8 @@
+{% extends "email/base.multipart" %}
+
+{% block subject %}{{'email-changed-subject'|translate}}{% endblock %}
+{% block text_content %}{{'email-changed-text'|translate}}{% endblock %}
+
+{% block html_content %}
+  {{'email-changed-html'|translate|safe}}
+{% endblock %}

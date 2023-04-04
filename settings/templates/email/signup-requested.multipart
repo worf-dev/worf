@@ -1,0 +1,8 @@
+{% extends "email/base.multipart" %}
+
+{% block subject %}{{'signup-requested-subject'|translate}}{% endblock %}
+{% block text_content %}{{'signup-requested-text'|translate}}{% endblock %}
+
+{% block html_content %}
+  {{'signup-requested-html'|translate|safe}}
+{% endblock %}

@@ -1,0 +1,25 @@
+github: # Github OAuth Test Settings
+  client_id: '1234'
+  client_secret: '5678'
+  code: '1234'
+  host: github.com
+  redirect_uri: http://localhost:8080
+  state: foo
+  user_response_data:
+    id: '550026'
+    email: max@mustermann.de
+    email_verified: true
+gitlab: # Gitlab OAuth Test Settings
+  client_id: '1234'
+  client_secret: '5678'
+  host: gitlab.com
+  redirect_uri: http://localhost:8080
+  code: '1234'
+  state: foo
+  user_response_data:
+    id: '550026'
+    email: max@mustermann.de
+    email_verified: true
+api:
+  signup:
+    approve: false

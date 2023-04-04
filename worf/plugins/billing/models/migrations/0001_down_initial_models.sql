@@ -1,0 +1,19 @@
+DROP TABLE worf_billing_version;
+
+DROP TABLE subscription_item_provider;
+DROP TABLE subscription_item;
+DROP TABLE payment;
+DROP TABLE invoice_item;
+DROP TABLE invoice;
+DROP TABLE subscription_provider;
+DROP TABLE subscription;
+DROP TABLE payment_method;
+DROP TABLE price_provider;
+DROP TABLE price;
+DROP TABLE product_provider;
+DROP TABLE product;
+DROP TABLE customer_provider;
+DROP TABLE customer;
+DROP TABLE tax_rate_provider;
+DROP TABLE tax_rate;
+DROP TABLE billing_event;

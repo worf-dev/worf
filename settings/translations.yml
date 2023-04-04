@@ -1,0 +1,336 @@
+translations:
+  billing-invoice-vat-id:
+    en: VAT ID
+    de: U.St-ID
+  billing-invoice-from:
+    en: From
+    de: Von
+  billing-invoice-mail-subject:
+    en: New Invoice
+    de: Neue Rechnung
+  billing-invoice-payment-notice:
+    en: |
+      You can pay this invoice by bank transfer to the account specified below. Please specify "{number}" in the subject line of the transfer.
+  billing-invoice-mail-text:
+    en: >
+      Dear customer,
+
+
+      please find attached your new invoice no. {number}. If you have any questions or if you think we got something wrong please get in touch with us by replying to this e-mail. Thank you!
+    de: >
+      Lieber Kunde,
+
+
+      anbei finden Sie die gerade für Sie erstellte Rechnung Nr. {number}. Falls Sie Fragen zur Rechnung haben oder diese einen Fehler enthält antworten Sie einfach auf diese E-Mail. Vielen Dank!
+  billing-invoice-mail-html:
+    en: |
+      <p>
+        Dear customer,
+      </p>
+      <p>
+        please find attached your new invoice no. {number}. If you have any questions or if you think we got something wrong please get in touch with us by replying to this e-mail. Thank you!
+      </p>
+    de: |
+      <p>
+        Lieber Kunde,
+      </p>
+      <p>
+        anbei finden Sie die gerade für Sie erstellte Rechnung Nr. {number}. Falls Sie Fragen zur Rechnung haben oder diese einen Fehler enthält antworten Sie einfach auf diese E-Mail. Vielen Dank!
+      </p>
+  billing-invoice-to:
+    en: To
+    de: An
+  # sent when the password was successfully reset
+  password-changed-subject:
+    de: Passwort geändert
+    en: Password changed
+  password-changed-text:
+    en: >
+      Hi,
+
+
+      someone (hopefully you) just changed your password. If it wasn't you
+      please get in touch with us, as your account might have been compromised.
+  password-changed-html:
+    en: >
+      <p>
+        Hi,
+      </p>
+      <p>
+        someone (hopefully you) just changed your password. If it wasn't you
+        please get in touch with us, as your account might have been compromised.
+      </p>
+  # sent when requesting a password reset link
+  reset-password-subject:
+    de: Passwort zurücksetzen
+    en: Reset your password
+  reset-password-text:
+    en: >
+      Hi,
+
+
+      someone (hopefully you) requested a password reset.
+      To reset your password, click on the following link:
+
+
+      {url}
+  reset-password-html:
+    en: >
+      <p>
+        Hi,
+      </p>
+      <p>
+        someone (hopefully you) requested a password reset.
+        To reset you password, click on the button below:
+      </p>
+  # sent when someone requests a signup
+  signup-requested-subject:
+    de: Registrierung angefordert
+    en: Signup requested
+  signup-requested-text:
+    en: >
+      Hi,
+
+
+      someone requested to sign up for our beta. Wohoo!
+  signup-requested-html:
+    en: >
+      <p>
+        Hi,
+      </p>
+      <p>
+        someone requested to sign up for out beta. Wohoo!
+      </p>
+  # sent when requesting an e-mail address change
+  change-email-subject:
+    de: E-Mail ändern
+    en: Change your e-mail
+  change-email-text:
+    en: >
+      Hi,
+
+
+      You requested a change of your primary e-mail address. We need you to verify
+      your new e-mail before confirming this change. To do this, please click on
+      the following link:
+
+
+      {url}
+  change-email-html:
+    en: >
+      <p>
+        Hi,
+      </p>
+      <p>
+        You requested a change of your primary e-mail address. We need you to verify
+        your new e-mail before confirming this change. To do this, please click here:
+      </p>
+  # sent when an e-mail change was successfully performed
+  email-changed-subject:
+    de: E-Mail geändert
+    en: E-Mail changed
+  email-changed-text:
+    en: >
+      Hi,
+
+
+      someone (hopefully you) just changed your e-email address. If it wasn't you
+      please get in touch with us, as your account might have been compromised.
+  email-changed-html:
+    en: >
+      <p>
+        Hi,
+      </p>
+      <p>
+      someone (hopefully you) just changed your e-email address. If it wasn't you
+      please get in touch with us, as your account might have been compromised.
+      </p>
+  # sent when confirming a signup
+  confirm-signup-subject:
+    de: E-Mail bestätigen
+    en: Verify your e-mail
+  confirm-signup-text:
+    en: >
+      Hi,
+
+
+      thanks for signing up for {service}! We just need to verify your e-mail
+      before giving you access. To do that, please click on
+      the following link:
+
+
+      {url}
+  confirm-signup-html:
+    en: >
+      <p>
+        Hi,
+      </p>
+      <p>
+        thanks for signing up for {service}! We need to verify your e-mail
+        before giving you access. To do that, please click here:
+      </p>
+  # sent when signup is complete
+  signup-complete-subject:
+    de: Willkommen! 
+    en: Welcome!
+  signup-complete-text:
+    en: >
+      Hi,
+
+
+      thanks for signing up for {service}! 
+      
+      Your account is now enabled and ready to be used.
+  signup-complete-html:
+    en: >
+      <p>
+        Hi,
+      </p>
+      <p>
+        thanks for signing up for {service}! Your account is now enabled and
+        ready to be used. 
+      </p>
+  invitation-subject:
+    en: You have been invited!
+  invitation-text:
+    en: >
+      Hi,
+
+
+      you have been invited to sign up for {service} by {email}. You can use
+      this invitation by clicking on the following link:
+
+
+      {url}
+  invitation-accept:
+    en: Accept invitation
+    de: Einladung akzeptieren
+  invitation-html:
+    en: >
+      <p>
+        Hi,
+      </p>
+      <p>
+        you have been invited to sign up for {service} by {email}.
+      </p>
+  invitation-message-text:
+    en: >
+      The following message was included with the invitation:
+
+
+      {message}
+  invitation-message-html:
+    en: >
+      <p>
+        The following message was included with the invitation:
+      </p>
+      <p>
+        {message}
+      </p>
+  access-tokens:
+    valid-until-in-past:
+      en: The token validity data must be in the future
+    too-many:
+      en: You have created too many access tokens, please delete some before creating more
+    cannot-delete-current-token:
+      en: You cannot delete your currently active access token (log out to delete it)
+  scopes:
+    please-choose-one:
+      en: Please choose at least one scope
+    invalid-scope:
+      en: "This is not a valid scope (valid scopes: {scopes})"
+    superuser-only-scope:
+      en: Scope can only be chosen by a superuser
+  password:
+    too-short:
+      en: Password is too short
+  display-name:
+    invalid:
+      en: Not a valid display name
+  validation:
+    invalid-code:
+      en: Not a valid validation code
+  language:
+    invalid-format:
+      en: Not a valid language code
+    invalid-choice:
+      en: Not a valid language choice
+  block-email:
+    code-missing:
+      en: Block code is missing
+    invalid-or-expired-code:
+      en: Block code is invalid or expired
+    already-blocked:
+      en: This e-mail is already blocked
+    token-already-used:
+      en: This blocking code was already used.
+      de: Der eingesetzte Blocking-Code wurde bereits genutzt.
+  success:
+    en: Sucess
+  invalid-data:
+    en: Invalid data
+  not-found:
+    en: Not found
+  cannot-send-email:
+    en: |
+      Cannot send e-mail, either due to a block or because an e-mail has been
+      sent for the same purpose recently (in that case just wait a few minutes).
+  invitations:
+    already-exists:
+      en: An invitation already exists for this e-mail
+  users:
+    already-exists:
+      en: A user with this display name or e-mail already exists
+    cannot-disable-own-account:
+      en: You cannot disable your own account
+    cannot-remove-own-superuser-status:
+      en: You cannot remove your own superuser status
+    cannot-delete-own-account:
+      en: You cannot delete your own account
+  email-change:
+    email-already-taken:
+      en: This e-mail is already taken
+    verification-mail-sent:
+      en: A verification e-mail was just sent
+  login:
+    failed:
+      en: Login failed. Wrong username or password?
+      de: Anmeldung fehlgeschlagen. Falscher Benutzername oder falsches Passwort?
+    account-disabled:
+      en: Your account is disabled
+  password-change:
+    invalid-current-password:
+      en: You entered an invalid current password
+  password-reset:
+    reset-email-sent:
+      en: A password reset e-mail was just sent
+  signup:
+    invitation-invalid:
+      en: This invitation code is not valid or was already used
+    email-already-taken:
+      en: |
+        There is already a user with this e-mail address. Please sign in with
+        this e-mail and associate another login provider with it.
+    pending-approval:
+      en: Your signup request awaits confirmation
+    invitation-email-does-not-match:
+      en: The e-mail you provided does not match the one given in the invitation.
+    token-already-used:
+      en: This signup code was already used.
+      de: Dieser Registrierungscode wurde bereits genutzt.
+  otp:
+    invalid-code:
+      en: Not a valid OTP token
+  form:
+    invalid-email:
+      en: Invalid e-mail address
+    invalid-length:
+      en: Invalid string length [{min}-{max}] #min, max
+    not-of-type:
+      de: Not of type {type} #type
+    integer-out-of-bounds:
+      en: Out of bounds [{min}-{max}] #min, max
+    datetime-not-well-formatted:
+      en: "Not a well-formatted datetime (format: {format})" #format
+    not-a-valid-choice:
+      en: "Not a valid choice (choices: {choices})" #choices

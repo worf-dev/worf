@@ -1,0 +1,103 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link href="file:billing/invoice/invoice.css" media="print" rel="stylesheet">
+    <style>
+    @page {
+      margin: 3cm;
+      @bottom-left {
+        color: #2682c3;
+        white-space: pre-wrap;
+        font-size: 9pt;
+        content: '{{company.name}}\A IBAN: {{company.bank_account.iban}}\A BIC: {{company.bank_account.bic}}\A Bank: {{company.bank_account.bank}}'; }
+      @bottom-right {
+        color: #a9a;
+        content: '{{company.billing_email}}\A {{company.url}}';
+        white-space: pre-wrap;
+        font-family: Pacifico;
+        font-size: 9pt; }
+    }
+    </style>
+    <title>Invoice</title>
+    <meta name="description" content="Invoice demo sample">
+    <meta name="author" content="Kozea">
+  </head>
+
+  <body>
+    <h1>Invoice</h1>
+
+    <aside>
+      <address id="from">
+        <u>{{'billing-invoice-from'|translate}}</u>
+        {{company.name}}
+        {{company.street}}
+        {{company.zip_code}} {{company.city}}
+        {{'billing-invoice-vat-id'|translate}}: {{company.vat_id}}
+      </address>
+
+      <address id="to">
+        <u>{{'billing-invoice-to'|translate}}</u>
+        {{invoice.customer_name}}
+        {{invoice.customer_street}}
+        {{invoice.customer_zip_code}} {{invoice.customer_city}}
+        {{invoice.customer_country}}
+        {% if invoice.customer_vat_id %}{{'billing-invoice-vat-id'|translate}}: {{invoice.customer_vat_id}}{% endif %}
+      </address>
+    </aside>
+
+    <dl id="informations">
+      <dt>Customer ID</dt>
+      <dd>{{invoice.subscription.customer.ext_id.hex[:8]}}</dd>
+      <dt>Invoice number</dt>
+      <dd>{{invoice.number}}</dd>
+      <dt>Date</dt>
+      <dd>{{invoice.date}}</dd>
+      <dt>Status</dt>
+      <dd>{{invoice.status}}</dd>
+    </dl>
+
+    <table>
+      <thead>
+        <th>Description</th>
+        <th>Quantity</th>
+        <th>Amount</th>
+      </thead>
+      <tbody>
+        {% for item in invoice.items %}
+        <tr>
+          <td>{{item.description}} ({{item.period_start}} - {{item.period_end}})</td>
+          <td>{{item.quantity}}</td>
+          <td>{{"%.2f"|format(item.amount/100)}} {{item.currency|upper}}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <table id="total">
+      <thead>
+        <tr>
+          <th>&nbsp;</th>
+          <th>&nbsp;</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Subtotal</td>
+          <td>{{"%.2f"|format(invoice.subtotal/100)}} {{invoice.currency|upper}}</td>
+        </tr>
+        <tr>
+	  <td>{{invoice.items.0.tax_rate.name}} ({{invoice.items.0.tax_rate.percentage}} %)</td>
+          <td>{{"%.2f"|format(invoice.tax/100)}} {{invoice.currency|upper}}</td>
+        </tr>
+        <tr>
+          <td>Amount due</td>
+          <td>{{"%.2f"|format(invoice.amount/100)}} {{invoice.currency|upper}}</td>
+        </tr>
+      </tbody>
+    </table>
+    {% if invoice.status != 'paid' %}
+    <hr />
+    {{'billing-invoice-payment-notice'|translate(number=invoice.number)}}
+    {% endif %}
+  </body>
+</html>

@@ -1,0 +1,7 @@
+include req.py
+include requirements.txt
+recursive-include worf *.sql
+recursive-include worf *.yml
+recursive-include worf *.ini
+recursive-include worf *.mako
+

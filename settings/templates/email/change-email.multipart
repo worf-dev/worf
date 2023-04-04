@@ -1,0 +1,12 @@
+{% extends "email/base.multipart" %}
+
+{% set url = 'change_email'|url(hash={'code':code}) %}
+
+{% block subject %}{{'change-email-subject'|translate}}{% endblock %}
+{% block text_content %}{{'change-email-text'|translate(url=url)}}{% endblock %}
+
+{% block html_content %}
+  {{'change-email-html'|translate(name=name, url=url)|safe}}
+{% endblock %}
+{% block html_button_primary_url %}{{url}}{% endblock%}
+{% block html_button_primary_text %}{{'change-email-subject'|translate}}{% endblock%}

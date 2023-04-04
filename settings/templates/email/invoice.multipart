@@ -1,0 +1,8 @@
+{% extends "email/base.multipart" %}
+
+{% block subject %}{{'billing-invoice-mail-subject'|translate}}{% endblock %}
+{% block text_content %}{{'billing-invoice-mail-text'|translate(number=invoice.number)}}{% endblock %}
+
+{% block html_content %}
+  {{'billing-invoice-mail-html'|translate(number=invoice.number)|safe}}
+{% endblock %}

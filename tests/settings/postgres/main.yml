@@ -1,0 +1,12 @@
+test: true
+debug: true
+db:
+  url: "postgresql://{user}:{password}@{host}:{port}/{db}"
+  user: worf
+  db: worf_test
+  password: worf
+  host: localhost
+  port: 5432
+  echo: false
+google:
+    client: 12897892

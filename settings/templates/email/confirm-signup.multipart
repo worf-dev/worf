@@ -1,0 +1,12 @@
+{% extends "email/base.multipart" %}
+
+{% set url = 'confirm_signup'|url(hash={'code':code}) %}
+
+{% block subject %}{{'confirm-signup-subject'|translate}}{% endblock %}
+{% block text_content %}{{'confirm-signup-text'|translate(url=url, service=service.name)}}{% endblock %}
+
+{% block html_content %}
+  {{'confirm-signup-html'|translate(name=name, url=url, service=service.name)|safe}}
+{% endblock %}
+{% block html_button_primary_url %}{{url}}{% endblock%}
+{% block html_button_primary_text %}{{'confirm-signup-subject'|translate}}{% endblock%}

@@ -1,0 +1,20 @@
+{% extends "email/base.multipart" %}
+
+{% set url = 'signup'|url(hash={'invitation': token}) %}
+{% block html_button_primary_url %}{{url}}{% endblock%}
+{% block html_button_primary_text %}{{'invitation-accept'|translate}}{% endblock%}
+
+{% block subject %}{{'invitation-subject'|translate}}{% endblock %}
+{% block text_content -%}
+{{'invitation-text'|translate(url=url, service=service.name, email=email)}}
+{%- if message is defined %}
+{{'invitation-message-text'|translate(message=message)}}
+{%- endif -%}
+{%- endblock %}
+
+{% block html_content %}
+  {{'invitation-html'|translate(url=url, service=service.name, email=email)|safe}}
+  {% if message is defined -%}
+    {{'invitation-message-html'|translate(message=message)}}
+  {%- endif %}
+{% endblock %}
